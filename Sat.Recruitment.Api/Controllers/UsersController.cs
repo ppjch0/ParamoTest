@@ -4,6 +4,7 @@ using Sat.Recruitment.Entity.Commons;
 using Sat.Recruitment.Entity.Entities;
 using Sat.Recruitment.Entity.Interfaces.Services;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Sat.Recruitment.Api.Controllers
 {
@@ -20,7 +21,7 @@ namespace Sat.Recruitment.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Result> CreateUser([FromBody] UserDTO userDTO)
+        public async Task<ActionResult<Result>> CreateUser([FromBody] UserDTO userDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -31,7 +32,7 @@ namespace Sat.Recruitment.Api.Controllers
             }
 
             var user = this._userMapper.MapUserDtoToUser(userDTO);
-            var result = this._userService.Create(user);
+            var result = await this._userService.Create(user);
 
             return result;
         }

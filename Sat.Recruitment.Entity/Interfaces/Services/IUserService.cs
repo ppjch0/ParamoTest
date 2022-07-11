@@ -7,8 +7,6 @@ namespace Sat.Recruitment.Entity.Interfaces.Services
 {
     public interface IUserService
     {
-        Task<IEnumerable<User>> GetList();
-
-        Result Create(User user);
+        Task<Result> Create(User user);
     }
 }

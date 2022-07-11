@@ -49,12 +49,10 @@
     <Compile Include="Entities\NormalUser.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Enums\UserType.cs" />
-    <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Interfaces\Services\IUserService.cs" />
     <Compile Include="Interfaces\Repositories\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

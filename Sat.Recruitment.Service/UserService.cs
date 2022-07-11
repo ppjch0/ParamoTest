@@ -15,9 +15,9 @@ namespace Sat.Recruitment.Service
         {
             _userRepository = userRepository;
         }
-        public Result Create(User user)
+        public async Task<Result> Create(User user)
         {
-            var isDuplicated = IsDuplicated(user);
+            var isDuplicated = await IsDuplicated(user);
             if (isDuplicated) return new Result("User is duplicated", false);
 
             user.CalculateGif();
@@ -26,19 +26,14 @@ namespace Sat.Recruitment.Service
             return new Result("User Created", true);
         }
 
-        public async Task<IEnumerable<User>>GetList()
+        private async Task<bool> IsDuplicated(User user)
         {
-            return await _userRepository.GetAll();
-        }
+            var _users = await _userRepository.GetAll();
 
-        private bool IsDuplicated(User user)
-        {
-            var _users = GetList().Result;
-
-            return _users.Any(u => u.Address == user.Address
-                                || u.Email == user.Email
-                                || u.Name == user.Name
-                                || u.Phone == user.Phone);
+            return _users.Any(u => u.Address.ToLower().Trim() == user.Address.ToLower().Trim()
+                                || u.Email.ToLower().Trim() == user.Email.ToLower().Trim()
+                                || u.Name.ToLower().Trim() == user.Name.ToLower().Trim()
+                                || u.Phone.ToLower().Trim() == user.Phone.ToLower().Trim());
         }
 
         
